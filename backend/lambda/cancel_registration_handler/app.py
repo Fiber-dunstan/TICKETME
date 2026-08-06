@@ -6,6 +6,7 @@ associated event.
 """
 import os
 import sys
+from urllib.parse import unquote
 import boto3
 from botocore.exceptions import ClientError
 
@@ -25,7 +26,7 @@ def handler(event, context):
     logger.info("Received request to cancel a registration")
 
     path_params = event.get("pathParameters") or {}
-    registration_id = (path_params.get("id") or "").strip()
+    registration_id = unquote(path_params.get("id") or "").strip()
 
     if not registration_id:
         return build_response(400, {"error": "Registration id is required in the URL path."})
