@@ -1,0 +1,233 @@
+/* ---- Buttons ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  transition: all var(--transition-fast);
+}
+
+.btn--primary {
+  background: var(--color-primary);
+  color: white;
+}
+.btn--primary:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+  box-shadow: var(--shadow-glow);
+}
+.btn--primary:disabled {
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+}
+.btn--full { width: 100%; }
+
+/* ---- View header / toolbar ---- */
+.view-title { font-size: var(--text-3xl); font-weight: 800; letter-spacing: -0.02em; }
+.view-subtitle { color: var(--color-text-secondary); margin-top: var(--space-2); }
+.view-header { margin-bottom: var(--space-8); }
+
+.toolbar {
+  display: flex;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+  flex-wrap: wrap;
+}
+
+.input, .select {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-text-primary);
+  font-size: var(--text-sm);
+  transition: border-color var(--transition-fast);
+}
+.input:focus, .select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-glow);
+}
+#event-search { flex: 1; min-width: 240px; }
+
+/* ---- Events grid + cards (glassmorphism) ---- */
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-6);
+}
+
+.event-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+  animation: fadeInUp 0.4s ease both;
+}
+.event-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: var(--shadow-lg);
+}
+
+.event-card__top { display: flex; justify-content: space-between; align-items: center; }
+.event-card__title { font-size: var(--text-lg); font-weight: 700; }
+.event-card__description {
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.event-card__meta { display: flex; flex-direction: column; gap: var(--space-1); font-size: var(--text-xs); color: var(--color-text-muted); }
+
+/* ---- Badges ---- */
+.badge {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+}
+.badge--category { background: var(--color-primary-soft); color: var(--color-primary-hover); }
+.badge--success { background: var(--color-success-soft); color: var(--color-success); }
+.badge--warning { background: rgba(245, 158, 11, 0.15); color: var(--color-warning); }
+.badge--danger { background: var(--color-danger-soft); color: var(--color-danger); }
+
+/* ---- Empty / error states ---- */
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: var(--space-16) var(--space-6);
+  color: var(--color-text-secondary);
+}
+.empty-state__icon { font-size: 2.5rem; margin-bottom: var(--space-4); }
+.empty-state--error { color: var(--color-danger); }
+
+/* ---- Modal ---- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+.modal-overlay--visible { opacity: 1; }
+
+.modal {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  width: min(440px, 90vw);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(12px) scale(0.98);
+  transition: transform var(--transition-base);
+}
+.modal-overlay--visible .modal { transform: translateY(0) scale(1); }
+
+.modal__header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-6); }
+.modal__title { font-size: var(--text-lg); font-weight: 700; }
+
+/* ---- Form ---- */
+.form { display: flex; flex-direction: column; gap: var(--space-2); }
+.form-label { font-size: var(--text-xs); font-weight: 600; color: var(--color-text-secondary); margin-top: var(--space-3); }
+.form .btn { margin-top: var(--space-6); }
+
+/* ---- Toasts ---- */
+.toast-container {
+  position: fixed;
+  bottom: var(--space-6);
+  right: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  z-index: 200;
+}
+.toast {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-lg);
+  transform: translateX(120%);
+  transition: transform var(--transition-base);
+  min-width: 280px;
+}
+.toast--visible { transform: translateX(0); }
+.toast--success .toast__icon { color: var(--color-success); }
+.toast--error .toast__icon { color: var(--color-danger); }
+
+/* ---- Skeletons ---- */
+.skeleton {
+  background: linear-gradient(90deg, var(--color-surface) 25%, var(--color-surface-hover) 50%, var(--color-surface) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-sm);
+}
+.skeleton--badge { width: 70px; height: 22px; border-radius: var(--radius-full); }
+.skeleton--title { width: 80%; height: 20px; margin-top: var(--space-2); }
+.skeleton--text { width: 100%; height: 14px; }
+.skeleton--button { width: 100%; height: 40px; margin-top: var(--space-4); }
+
+/* ---- Registration cards ---- */
+.registrations-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.reg-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  animation: fadeInUp 0.3s ease both;
+}
+
+.reg-card--cancelled { opacity: 0.6; }
+
+.reg-card__ticket-code {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  font-family: monospace;
+}
+
+.reg-card__event-id {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin: var(--space-1) 0 var(--space-2);
+}
+
+.btn--danger {
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+}
+.btn--danger:hover:not(:disabled) {
+  background: var(--color-danger);
+  color: white;
+}

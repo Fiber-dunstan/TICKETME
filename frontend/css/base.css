@@ -1,0 +1,187 @@
+/*
+  Base styles: resets, global typography, and layout primitives.
+  Keeps every component starting from a consistent, predictable baseline.
+*/
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  line-height: 1.5;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ---- App Shell Layout ---- */
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(11, 12, 20, 0.75);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.app-header__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 700;
+  font-size: var(--text-lg);
+}
+
+.brand__mark {
+  font-size: var(--text-xl);
+}
+
+.main-nav {
+  display: flex;
+  gap: var(--space-6);
+  flex: 1;
+}
+
+.main-nav__link {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  padding: var(--space-2) 0;
+  position: relative;
+  transition: color var(--transition-fast);
+}
+
+.main-nav__link:hover {
+  color: var(--color-text-primary);
+}
+
+.main-nav__link.is-active {
+  color: var(--color-text-primary);
+}
+
+.main-nav__link.is-active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-primary);
+  border-radius: var(--radius-full);
+}
+
+.icon-button {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  display: grid;
+  place-items: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  transition: background var(--transition-fast);
+}
+
+.icon-button:hover {
+  background: var(--color-surface-hover);
+}
+
+.app-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-6) var(--space-16);
+  min-height: calc(100vh - 70px);
+}
+
+/* ---- Light theme override ---- */
+body.theme-light {
+  --color-bg: #f7f7fb;
+  --color-bg-elevated: #ffffff;
+  --color-surface: rgba(15, 15, 30, 0.03);
+  --color-surface-hover: rgba(15, 15, 30, 0.06);
+  --color-border: rgba(15, 15, 30, 0.08);
+  --color-text-primary: #14141f;
+  --color-text-secondary: #55556b;
+  --color-text-muted: #8a8a9c;
+}
+
+/* ---- Responsive adjustments ---- */
+@media (max-width: 640px) {
+  .app-header__inner {
+    padding: var(--space-3) var(--space-4);
+    gap: var(--space-3);
+  }
+
+  .main-nav {
+    gap: var(--space-3);
+  }
+
+  .main-nav__link {
+    font-size: var(--text-xs);
+  }
+
+  .brand__name {
+    display: none; /* Icon-only brand on very small screens to save space */
+  }
+
+  .app-content {
+    padding: var(--space-6) var(--space-4) var(--space-12);
+  }
+
+  .view-title {
+    font-size: var(--text-2xl);
+  }
+
+  .toolbar {
+    flex-direction: column;
+  }
+
+  .events-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .reg-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .reg-card .btn--danger {
+    width: 100%;
+  }
+}
