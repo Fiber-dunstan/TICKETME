@@ -22,6 +22,7 @@ registrationId	String (UUID)	Partition Key	Unique identifier for a registration
 eventId	String		Identifier of the associated event
 email	String		Registrant's email address
 fullName	String		Registrant's full name
+phone       string      registers contact or phone number
 status	String		Registration status (CONFIRMED or CANCELLED)
 registeredAt	String (ISO 8601)		Registration timestamp
 ticketCode	String		Unique ticket reference
