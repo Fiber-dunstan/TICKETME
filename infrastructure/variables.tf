@@ -15,3 +15,9 @@ variable "environment" {
   type        = string
   default     = "dev"
 }
+
+variable "lambda_runtime" {
+  description = "Python runtime version for all Lambda functions"
+  type        = string
+  default     = "python3.12"
+}
