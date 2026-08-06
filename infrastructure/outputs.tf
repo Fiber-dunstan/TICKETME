@@ -17,3 +17,8 @@ output "lambda_function_names" {
     cancel_registration  = aws_lambda_function.cancel_registration.function_name
   }
 }
+
+output "api_base_url" {
+  description = "Base URL for the TicketMe REST API"
+  value       = aws_api_gateway_stage.dev.invoke_url
+}
