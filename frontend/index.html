@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TicketMe — Event Registration & Ticketing</title>
+  <meta name="description" content="Discover events and register in seconds." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+</head>
+<body>
+
+  <!-- App Shell: header stays fixed, #app-content is swapped by the router -->
+  <div id="app">
+
+    <header class="app-header">
+      <div class="app-header__inner">
+        <a href="#/events" class="brand" data-nav-link>
+          <span class="brand__mark">🎟</span>
+          <span class="brand__name">TicketMe</span>
+        </a>
+
+        <nav class="main-nav">
+          <a href="#/events" class="main-nav__link" data-nav-link data-route="/events">Events</a>
+          <a href="#/my-registrations" class="main-nav__link" data-nav-link data-route="/my-registrations">My Registrations</a>
+        </nav>
+
+        <button id="theme-toggle" class="icon-button" aria-label="Toggle dark mode" title="Toggle theme">
+          <span id="theme-icon">🌙</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="app-content" class="app-content">
+      <!-- Views are injected here dynamically by router.js -->
+    </main>
+
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
