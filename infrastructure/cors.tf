@@ -20,11 +20,12 @@ resource "aws_api_gateway_method" "options" {
 }
 
 resource "aws_api_gateway_integration" "options" {
-  for_each    = local.cors_resources
-  rest_api_id = aws_api_gateway_rest_api.ticketme.id
-  resource_id = each.value
-  http_method = aws_api_gateway_method.options[each.key].http_method
-  type        = "MOCK"
+  for_each             = local.cors_resources
+  rest_api_id          = aws_api_gateway_rest_api.ticketme.id
+  resource_id          = each.value
+  http_method          = aws_api_gateway_method.options[each.key].http_method
+  type                 = "MOCK"
+  passthrough_behavior = "WHEN_NO_MATCH"
 
   request_templates = {
     "application/json" = "{\"statusCode\": 200}"
