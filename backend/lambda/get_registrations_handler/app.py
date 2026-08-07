@@ -5,6 +5,7 @@ Returns all registrations (any status) belonging to the given email address.
 """
 import os
 import sys
+from urllib.parse import unquote
 import boto3
 from boto3.dynamodb.conditions import Key
 
@@ -24,7 +25,7 @@ def handler(event, context):
     logger.info("Received request to fetch registrations by email")
 
     path_params = event.get("pathParameters") or {}
-    email = (path_params.get("email") or "").strip().lower()
+    email = unquote(path_params.get("email") or "").strip().lower()
 
     if not email:
         return build_response(400, {"error": "Email is required in the URL path."})
