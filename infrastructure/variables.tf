@@ -26,3 +26,9 @@ variable "alert_email" {
   description = "Email address to receive operational alerts and registration confirmations"
   type        = string
 }
+
+variable "monthly_budget_limit" {
+  description = "Monthly AWS spending limit (USD) before budget alerts fire"
+  type        = string
+  default     = "5"
+}
