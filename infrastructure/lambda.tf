@@ -64,7 +64,9 @@ resource "aws_lambda_function" "register" {
   source_code_hash = data.archive_file.register_zip.output_base64sha256
 
   environment {
-    variables = local.common_env_vars
+    variables = merge(local.common_env_vars, {
+      CONFIRMATION_TOPIC_ARN = aws_sns_topic.registration_confirmations.arn
+    })
   }
 
   tags = {

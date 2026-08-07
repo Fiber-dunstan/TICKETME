@@ -22,10 +22,12 @@ from validators import validate_registration_input  # noqa: E402
 
 logger = get_logger(__name__)
 dynamodb = boto3.resource("dynamodb")
+sns = boto3.client("sns")
 
 EVENTS_TABLE_NAME = os.environ.get("EVENTS_TABLE", "ticketme-events")
 REGISTRATIONS_TABLE_NAME = os.environ.get("REGISTRATIONS_TABLE", "ticketme-registrations")
 EMAIL_INDEX_NAME = os.environ.get("EMAIL_INDEX_NAME", "email-index")
+CONFIRMATION_TOPIC_ARN = os.environ.get("CONFIRMATION_TOPIC_ARN")
 
 
 def handler(event, context):
@@ -105,4 +107,23 @@ def handler(event, context):
         return build_response(500, {"error": "Failed to complete registration. Please try again."})
 
     logger.info(f"Registration created: {registration_id} for event {clean['eventId']}")
+
+    # Best-effort notification: we don't want an SNS hiccup to fail an
+    # otherwise-successful registration, so we log and continue on error
+    # rather than returning a 500 to the user at this point.
+    if CONFIRMATION_TOPIC_ARN:
+        try:
+            sns.publish(
+                TopicArn=CONFIRMATION_TOPIC_ARN,
+                Subject="TicketMe Registration Confirmed",
+                Message=(
+                    f"Hi {clean['fullName']},\n\n"
+                    f"You're confirmed for event {clean['eventId']}.\n"
+                    f"Your ticket code is: {ticket_code}\n\n"
+                    f"See you there!\n— TicketMe"
+                ),
+            )
+        except ClientError as e:
+            logger.error(f"Failed to publish SNS confirmation: {e}")
+
     return build_response(201, {"message": "Registration successful", "registration": registration_item})
