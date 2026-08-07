@@ -79,6 +79,12 @@ data "aws_iam_policy_document" "register_policy" {
       "${aws_dynamodb_table.registrations.arn}/index/email-index",
     ]
   }
+
+  statement {
+    effect    = "Allow"
+    actions   = ["sns:Publish"]
+    resources = [aws_sns_topic.registration_confirmations.arn]
+  }
 }
 
 resource "aws_iam_role_policy" "register_dynamodb" {

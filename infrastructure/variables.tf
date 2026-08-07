@@ -21,3 +21,8 @@ variable "lambda_runtime" {
   type        = string
   default     = "python3.12"
 }
+
+variable "alert_email" {
+  description = "Email address to receive operational alerts and registration confirmations"
+  type        = string
+}
