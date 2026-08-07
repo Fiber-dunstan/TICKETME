@@ -4,10 +4,10 @@
 # since it never reaches our Lambda functions.
 locals {
   cors_resources = {
-    events               = aws_api_gateway_resource.events.id
-    register             = aws_api_gateway_resource.register.id
-    registrations_email  = aws_api_gateway_resource.registrations_email.id
-    registration_id      = aws_api_gateway_resource.registration_id.id
+    events              = aws_api_gateway_resource.events.id
+    register            = aws_api_gateway_resource.register.id
+    registrations_email = aws_api_gateway_resource.registrations_email.id
+    registration_id     = aws_api_gateway_resource.registration_id.id
   }
 }
 
