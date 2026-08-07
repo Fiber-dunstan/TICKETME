@@ -223,3 +223,6 @@ infrastructure/*.tfstate
 infrastructure/*.tfstate.backup
 infrastructure/.terraform.lock.hcl
 infrastructure/*.tfvars
+
+# Build artifacts
+build/
