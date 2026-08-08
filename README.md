@@ -55,6 +55,13 @@ A serverless system where:
 - The entire system is defined as code (**Terraform**) and deployed via a tested, automated **CI/CD pipeline** (GitHub Actions)
 
 ## Architecture
+
+
+![TicketMe Architecture Diagram](docs/architecture/architecture-diagram.png)
+
+![TicketMe Architecture Diagram](docs/architecture/architecture-diagram.svg)
+
+
 ┌─────────────────────┐
                 │   Browser (SPA)      │
                 │  Vanilla JS frontend  │
