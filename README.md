@@ -240,7 +240,6 @@ Branch protection on `main` requires both checks to pass before a merge is allow
 - **Input validation & sanitization** on every write endpoint
 - **CloudWatch Logs** for every function, with 14-day retention (cost control)
 - **CloudWatch Alarms**: error rate (errors ÷ invocations) monitored per function, alerting via SNS if it exceeds 5%
-- **SNS**: operational alerts (ops team) + registration confirmations (end users)
 - **AWS Budgets**: monthly spend alerts at 80% actual / 100% forecasted
 
 ## Cost Optimization
@@ -268,7 +267,7 @@ A few real debugging challenges worth highlighting (detailed in [`docs/troublesh
 - Event-attendance forecasting using historical registration data (ML-ready architecture)
 - Custom domain + ACM certificate for the CloudFront distribution
 - Terraform remote state (S3 backend + DynamoDB locking) for team collaboration
-
+- Per-user registration confirmation emails via Amazon SES (SNS's static-subscriber model only supports notifying a fixed operator address, not dynamic per-registrant recipients)
 ## Documentation
 
 - [Architecture & Data Model](docs/architecture/data-model.md)
