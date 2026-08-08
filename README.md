@@ -59,51 +59,7 @@ A serverless system where:
 
 ![TicketMe Architecture Diagram](docs/architecture/architecture-diagram.png)
 
-![TicketMe Architecture Diagram](docs/architecture/architecture-diagram.svg)
 
-
-┌─────────────────────┐
-                │   Browser (SPA)      │
-                │  Vanilla JS frontend  │
-                └──────────┬───────────┘
-                           │ HTTPS
-                ┌──────────▼───────────┐
-                │  CloudFront + S3      │
-                │  (static hosting)      │
-                └──────────┬───────────┘
-                           │
-                ┌──────────▼───────────┐
-                │   API Gateway (REST)  │
-                └──────────┬───────────┘
-                           │
-    ┌──────────────────────┼──────────────────────┐
-    ▼                      ▼                        ▼
-    ┌───────────────┐ ┌──────────────────┐ ┌─────────────────────┐
-│ list_events │ │ register │ │ get_registrations │
-│ Lambda │ │ Lambda │ │ Lambda │
-└───────┬────────┘ └────────┬─────────┘ └──────────┬──────────┘
-│ │ │
-│ ┌────────▼─────────┐ │
-│ │ cancel_registration│ │
-│ │ Lambda │ │
-│ └────────┬─────────┘ │
-│ │ │
-└──────────────────────┼──────────────────────────┘
-▼
-┌──────────────────────┐
-│ DynamoDB │
-│ events / registrations │
-└──────────┬───────────┘
-│
-┌──────────▼───────────┐
-│ CloudWatch Logs │
-│ + Error-Rate Alarms │
-└──────────┬───────────┘
-│
-┌──────────▼───────────┐
-│ SNS │
-│ Ops Alerts / Confirms │
-└───────────────────────┘
 See [`docs/architecture/`](docs/architecture/) for the full architecture writeup and data model.
 
 ## Tech Stack
