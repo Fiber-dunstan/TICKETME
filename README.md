@@ -2,7 +2,6 @@
 
 **A serverless Event Registration & Ticketing System, built entirely on AWS.**
 
-Final capstone project for the Azubi Africa AWS Cloud & AI Intensive Program.
 
 **🔗 Live Demo:** [https://d24m8nf71z49d9.cloudfront.net](https://d24m8nf71z49d9.cloudfront.net)
 
@@ -32,13 +31,13 @@ Final capstone project for the Azubi Africa AWS Cloud & AI Intensive Program.
 
 ## Overview
 
-TicketMe replaces manual, spreadsheet-based event registration workflows with a fully serverless, cloud-native REST API and web application. It handles event discovery, registration, duplicate/capacity prevention, cancellation, email confirmations, and real-time monitoring — all without managing a single server.
+TicketMe replaces manual, spreadsheet-based event registration workflows with a fully serverless, cloud-native REST API and web application. It handles event discovery, registration, duplicate/capacity prevention, cancellation, email confirmations, and real-time monitoring, all without managing a single server.
 
 ## The Problem
 
 Organizations commonly manage event signups through Microsoft Forms feeding into Excel spreadsheets. This approach:
 - Doesn't scale past a handful of events or attendees
-- Has no real-time capacity enforcement — overbooking is common
+- Has no real-time capacity enforcement, overbooking is common
 - Allows duplicate registrations with no automated prevention
 - Provides no automated confirmations or notifications
 - Offers zero operational visibility (no logs, no alerts, no monitoring)
@@ -88,7 +87,7 @@ See [`docs/architecture/`](docs/architecture/) for the full architecture writeup
 - View and cancel registrations by email
 - Skeleton loading states, toast notifications, empty/error states
 - Dark/light theme toggle
-- Least-privilege IAM — a dedicated role per Lambda function
+- Least-privilege IAM, a dedicated role per Lambda function
 - CloudWatch error-rate alarms (metric math: errors ÷ invocations)
 - AWS Budgets cost-tracking safety net
 - Fully automated CI: unit tests + Terraform validation on every push/PR
