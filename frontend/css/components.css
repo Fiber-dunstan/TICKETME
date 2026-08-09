@@ -29,7 +29,10 @@
 /* ---- View header / toolbar ---- */
 .view-title { font-size: var(--text-3xl); font-weight: 800; letter-spacing: -0.02em; }
 .view-subtitle { color: var(--color-text-secondary); margin-top: var(--space-2); }
-.view-header { margin-bottom: var(--space-8); }
+.view-header {
+  margin-bottom: var(--space-8);
+  text-align: center;
+}
 
 .toolbar {
   display: flex;
@@ -46,6 +49,10 @@
   color: var(--color-text-primary);
   font-size: var(--text-sm);
   transition: border-color var(--transition-fast);
+}
+.select option {
+  background: var(--color-bg-elevated);
+  color: var(--color-text-primary);
 }
 .input:focus, .select:focus {
   outline: none;
