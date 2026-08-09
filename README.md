@@ -5,7 +5,6 @@
 
 **🔗 Live Demo:** [https://d24m8nf71z49d9.cloudfront.net](https://d24m8nf71z49d9.cloudfront.net)
 
----
 
 ## Table of Contents
 
@@ -27,11 +26,10 @@
 - [Documentation](#documentation)
 - [Author](#author)
 
----
 
 ## Overview
 
-TicketMe replaces manual, spreadsheet-based event registration workflows with a fully serverless, cloud-native REST API and web application. It handles event discovery, registration, duplicate/capacity prevention, cancellation, email confirmations, and real-time monitoring, all without managing a single server.
+TicketMe replaces manual, spreadsheet-based event registration workflows with a fully serverless, cloud-native REST API and web application. It handles event discovery, registration, duplicate/capacity prevention, cancellation, email confirmations and real-time monitoring, all without managing a single server.
 
 ## The Problem
 
@@ -179,7 +177,7 @@ python scripts/seed_events.py
 
 ## Testing
 
-14 unit tests cover all 4 Lambda functions — happy paths and every failure branch (validation errors, missing resources, duplicates, capacity limits) — using `moto` to simulate AWS services in-memory, with zero cost and no real AWS calls.
+14 unit tests cover all 4 Lambda functions, happy paths and every failure branch (validation errors, missing resources, duplicates, capacity limits) using `moto` to simulate AWS services in-memory, with zero cost and no real AWS calls.
 
 ```powershell
 pytest tests/ -v
@@ -189,10 +187,10 @@ pytest tests/ -v
 
 Two GitHub Actions workflows run automatically:
 
-- **`backend-tests.yml`** — runs the full pytest suite on every push/PR to `main`/`develop`
-- **`terraform-validate.yml`** — checks Terraform formatting and validity on every change to `infrastructure/`
+- **`backend-tests.yml`**  runs the full pytest suite on every push/PR to `main`/`develop`
+- **`terraform-validate.yml`** checks Terraform formatting and validity on every change to `infrastructure/`
 
-Branch protection on `main` requires both checks to pass before a merge is allowed — a genuine automated quality gate, not just advisory.
+Branch protection on `main` requires both checks to pass before a merge is allowed, a genuine automated quality gate, not just advisory.
 
 **Branching strategy:** `main` (stable) ← `develop` (integration) ← `feature/*` branches, via Pull Requests.
 
@@ -206,10 +204,10 @@ Branch protection on `main` requires both checks to pass before a merge is allow
 
 ## Cost Optimization
 
-- DynamoDB `PAY_PER_REQUEST` billing — no idle cost
-- Lambda — pay only per invocation, generous AWS Free Tier
+- DynamoDB `PAY_PER_REQUEST` billing no idle cost
+- Lambda pay only per invocation, generous AWS Free Tier
 - CloudWatch Log Groups with explicit 14-day retention (prevents unbounded log storage cost)
-- CloudFront `PriceClass_100` — cheapest tier, sufficient edge coverage
+- CloudFront `PriceClass_100` cheapest tier, sufficient edge coverage
 - AWS Budgets as an explicit safety net
 
 ## Lessons Learned
@@ -218,8 +216,8 @@ A few real debugging challenges worth highlighting (detailed in [`docs/troublesh
 - Python module-name collisions across Lambda handlers during testing
 - DynamoDB reserved keywords (`capacity`, `status`) requiring `ExpressionAttributeNames`
 - API Gateway CORS preflight requiring explicit `passthrough_behavior`
-- API Gateway not reliably URL-decoding path parameters — solved with explicit `unquote()`
-- Git branching discipline — the practical cost of merging into the wrong base branch, and how consistent `git status` checks and `gh pr create --base develop` solved it for good
+- API Gateway not reliably URL-decoding path parameters, solved with explicit `unquote()`
+- Git branching discipline the practical cost of merging into the wrong base branch, and how consistent `git status` checks and `gh pr create --base develop` solved it for good
 
 ## Future Improvements
 
